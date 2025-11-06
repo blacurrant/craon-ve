@@ -47,7 +47,7 @@ export function Sidebar() {
                   "p-3 rounded-lg transition-all duration-200",
                   isActive
                     ? "bg-cyan-500/20 text-cyan-400"
-                    : "bg-transparent text-slate-400 group-hover:text-slate-300 group-hover:bg-slate-800/50",
+                    : " text-slate-400 group-hover:text-slate-300 group-hover:bg-slate-800/50 bg-slate-800/20",
                 )}
               >
                 <Icon className="w-5 h-5" />
