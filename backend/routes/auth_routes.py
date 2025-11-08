@@ -1,4 +1,3 @@
-# routes/auth_routes.py
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import (
     create_access_token,
@@ -33,8 +32,11 @@ def validate_password(password):
 
 
 # ✅ Signup/Register route
-@auth_bp.route('/signup', methods=['POST'])
+@auth_bp.route('/signup', methods=['POST', 'OPTIONS'])
 def signup():
+    if request.method == 'OPTIONS':
+        return '', 204
+        
     try:
         data = request.get_json()
         
@@ -117,8 +119,11 @@ def signup():
 
 
 # ✅ Login route
-@auth_bp.route('/login', methods=['POST'])
+@auth_bp.route('/login', methods=['POST', 'OPTIONS'])
 def login():
+    if request.method == 'OPTIONS':
+        return '', 204
+        
     try:
         data = request.get_json()
         username = data.get("username")  # This is actually email from frontend
@@ -176,9 +181,12 @@ def login():
 
 
 # ✅ Refresh token route
-@auth_bp.route('/refresh', methods=['POST'])
+@auth_bp.route('/refresh', methods=['POST', 'OPTIONS'])
 @jwt_required(refresh=True)
 def refresh():
+    if request.method == 'OPTIONS':
+        return '', 204
+        
     try:
         current_user = get_jwt_identity()
         
@@ -200,9 +208,12 @@ def refresh():
 
 
 # ✅ Logout route
-@auth_bp.route('/logout', methods=['POST'])
+@auth_bp.route('/logout', methods=['POST', 'OPTIONS'])
 @jwt_required()
 def logout():
+    if request.method == 'OPTIONS':
+        return '', 204
+        
     try:
         jti = get_jwt()["jti"]  # JWT ID
         revoked_tokens.add(jti)
@@ -219,9 +230,12 @@ def logout():
 
 
 # ✅ Get user profile
-@auth_bp.route('/profile', methods=['GET'])
+@auth_bp.route('/profile', methods=['GET', 'OPTIONS'])
 @jwt_required()
 def profile():
+    if request.method == 'OPTIONS':
+        return '', 204
+        
     try:
         current_user = get_jwt_identity()
         
@@ -248,9 +262,12 @@ def profile():
 
 
 # ✅ Update user profile
-@auth_bp.route('/profile', methods=['PUT'])
+@auth_bp.route('/profile', methods=['PUT', 'OPTIONS'])
 @jwt_required()
 def update_profile():
+    if request.method == 'OPTIONS':
+        return '', 204
+        
     try:
         current_user = get_jwt_identity()
         data = request.get_json()
@@ -282,9 +299,12 @@ def update_profile():
 
 
 # ✅ Change password
-@auth_bp.route('/change-password', methods=['POST'])
+@auth_bp.route('/change-password', methods=['POST', 'OPTIONS'])
 @jwt_required()
 def change_password():
+    if request.method == 'OPTIONS':
+        return '', 204
+        
     try:
         current_user = get_jwt_identity()
         data = request.get_json()
