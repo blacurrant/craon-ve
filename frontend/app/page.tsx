@@ -1,6 +1,6 @@
 import { Sidebar } from "@/components/sidebar"
 import { Navbar } from "@/components/navbar"
-import { VideoEditor } from "@/components/video-editor"
+import VideoEditor from "@/components/video-editor"
 
 export default function Page() {
   return (

@@ -33,7 +33,7 @@ export interface User {
 
 class AuthService {
   async login(email: string, password: string): Promise<AuthResponse> {
-    const response = await api.post<AuthResponse>("/auth/login", {
+    const response = await api.post<AuthResponse>("/api/auth/login", {
       username: email,
       password,
     });
@@ -47,7 +47,7 @@ class AuthService {
   }
 
   async signup(data: SignupData): Promise<AuthResponse> {
-    const response = await api.post<AuthResponse>("/auth/signup", data);
+    const response = await api.post<AuthResponse>("/api/auth/signup", data);
 
     // Store tokens
     api.setAuthToken(response.access_token);
