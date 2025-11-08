@@ -36,7 +36,7 @@ export default function LoginPage() {
     setLoading(true);
     try {
       // Call Flask API with typed response
-      const response = await api.post<LoginResponse>("/auth/login", {
+      const response = await api.post<LoginResponse>("/api/auth/login", {
         username: email, // Flask expects 'username'
         password,
       });
